@@ -45,9 +45,9 @@ add_action('edit_form_after_title','lnk_notas_titulo_contenido');
 function lnk_notas_meta_boxes() {
 	global $post;
 	if($post->post_type == 'post'){
-    add_meta_box('lnk_notas_sitio_vista',"Sitios Vista", 'lnk_notas_sitio_vista_meta_box', null, 'side', 'core');
-    add_meta_box('lnk_notas_audio_soundcloud',"Audio Soundcloud", 'lnk_notas_audio_soundcloud_meta_box', null, 'normal', 'core');
-    add_meta_box('lnk_notas_video_youtube',"Video Youtube", 'lnk_notas_video_youtube_meta_box', null, 'normal', 'core');
+		// add_meta_box('lnk_notas_sitio_vista',"Sitios Vista", 'lnk_notas_sitio_vista_meta_box', null, 'side', 'core');
+		add_meta_box('lnk_notas_audio',"Audio", 'lnk_notas_audio_meta_box', null, 'normal', 'core');
+		add_meta_box('lnk_notas_video_youtube',"Video Youtube", 'lnk_notas_video_youtube_meta_box', null, 'normal', 'core');
 		add_meta_box('lnk_notas_related',"Relacionados", 'lnk_notas_related_meta_box', null, 'normal', 'core');
 	}
 }
@@ -62,7 +62,7 @@ function lnk_notas_sitio_vista_meta_box(){
   $entv = get_post_meta($id,'lnk_notas_sitio_vista_entv',true);
   $encuentro = get_post_meta($id,'lnk_notas_sitio_vista_encuentro',true);
 
-	print "<div id='lnk_notas_audio_soundcloud_container'>";
+	print "<div id='lnk_notas_audio_container'>";
 
   print "<input type='checkbox' name='lnk_notas_sitio_vista_entv_check' ";
   if($entv == 'on'){
@@ -83,15 +83,15 @@ function lnk_notas_sitio_vista_meta_box(){
 }
 
 /**
- * Meta box audio soundcloud
+ * Meta box audio
  */
-function lnk_notas_audio_soundcloud_meta_box(){
+function lnk_notas_audio_meta_box(){
 	global $post;
 	$id = $post->ID;
-	$url = get_post_meta($id,'lnk_notas_audio_soundcloud',true);
+	$url = get_post_meta($id,'lnk_notas_audio',true);
 
-	print "<div id='lnk_notas_audio_soundcloud_container'>";
-	print "<input type='text' name='lnk_notas_audio_soundcloud_input' id='lnk_notas_audio_soundcloud_input' value='".$url."'/>";
+	print "<div id='lnk_notas_audio_container'>";
+	print "<input type='text' name='lnk_notas_audio_input' id='lnk_notas_audio_input' value='".$url."'/>";
 	print "</div>";
 	print "<div style='clear:both;'></div>";
 }
@@ -122,7 +122,7 @@ function lnk_notas_update_post_meta($id) {
   update_post_meta($id,'lnk_notas_volanta',$_POST['lnk_notas_volanta_input']);
   update_post_meta($id,'lnk_notas_sitio_vista_entv',$_POST['lnk_notas_sitio_vista_entv_check']);
   update_post_meta($id,'lnk_notas_sitio_vista_encuentro',$_POST['lnk_notas_sitio_vista_encuentro_check']);
-  update_post_meta($id,'lnk_notas_audio_soundcloud',$_POST['lnk_notas_audio_soundcloud_input']);
+  update_post_meta($id,'lnk_notas_audio',$_POST['lnk_notas_audio_input']);
   update_post_meta($id,'lnk_notas_video_youtube',$_POST['lnk_notas_video_youtube_input']);
 
   $aPost = get_post($id);
@@ -323,3 +323,27 @@ function actualizarPostRelated($postRelated){
 		}
 	}
 }
+
+/**
+ * AGREGO METADATA A REST API
+ */
+
+function register_api_lnk_post_audio() {
+	register_rest_field('post', 'audio', array (
+		'get_callback' => 'lnk_notas_get_audio',
+		'update_callback' => null,
+		'schema' => null,
+	));
+}
+
+function lnk_notas_get_audio($post) {
+	return get_post_meta($post->id, 'lnk_notas_audio' );
+}
+
+
+
+update_post_meta($id,'lnk_notas_volanta',$_POST['lnk_notas_volanta_input']);
+update_post_meta($id,'lnk_notas_sitio_vista_entv',$_POST['lnk_notas_sitio_vista_entv_check']);
+update_post_meta($id,'lnk_notas_sitio_vista_encuentro',$_POST['lnk_notas_sitio_vista_encuentro_check']);
+update_post_meta($id,'lnk_notas_audio',$_POST['lnk_notas_audio_input']);
+update_post_meta($id,'lnk_notas_video_youtube',$_POST['lnk_notas_video_youtube_input']);
