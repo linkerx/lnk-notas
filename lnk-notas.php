@@ -338,6 +338,7 @@ function register_api_lnk_post_audio() {
 function lnk_notas_get_audio($post) {
 	return get_post_meta($post['id'],'lnk_notas_audio' ,true );
 }
+add_action( 'rest_api_init', 'register_api_lnk_post_audio' );
 
 function register_api_lnk_post_video_youtube() {
 	register_rest_field('post', 'video_youtube', array (
@@ -349,3 +350,4 @@ function register_api_lnk_post_video_youtube() {
 function lnk_notas_get_video_youtube($post) {
 	return get_post_meta($post['id'],'lnk_notas_video_youtube' ,true );
 }
+add_action( 'rest_api_init', 'register_api_lnk_post_video_youtube' );
