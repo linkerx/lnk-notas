@@ -335,15 +335,17 @@ function register_api_lnk_post_audio() {
 		'schema' => null,
 	));
 }
-
 function lnk_notas_get_audio($post) {
-	return get_post_meta($post->id, 'lnk_notas_audio' );
+	return get_post_meta($post['id'],'lnk_notas_audio' ,true );
 }
 
-
-
-update_post_meta($id,'lnk_notas_volanta',$_POST['lnk_notas_volanta_input']);
-update_post_meta($id,'lnk_notas_sitio_vista_entv',$_POST['lnk_notas_sitio_vista_entv_check']);
-update_post_meta($id,'lnk_notas_sitio_vista_encuentro',$_POST['lnk_notas_sitio_vista_encuentro_check']);
-update_post_meta($id,'lnk_notas_audio',$_POST['lnk_notas_audio_input']);
-update_post_meta($id,'lnk_notas_video_youtube',$_POST['lnk_notas_video_youtube_input']);
+function register_api_lnk_post_video_youtube() {
+	register_rest_field('post', 'video_youtube', array (
+		'get_callback' => 'lnk_notas_get_video_youtube',
+		'update_callback' => null,
+		'schema' => null,
+	));
+}
+function lnk_notas_get_video_youtube($post) {
+	return get_post_meta($post['id'],'lnk_notas_video_youtube' ,true );
+}
