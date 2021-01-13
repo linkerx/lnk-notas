@@ -47,7 +47,7 @@ function lnk_notas_meta_boxes() {
 	if($post->post_type == 'post'){
 		// add_meta_box('lnk_notas_sitio_vista',"Sitios Vista", 'lnk_notas_sitio_vista_meta_box', null, 'side', 'core');
 		add_meta_box('lnk_notas_audio',"Audio", 'lnk_notas_audio_meta_box', null, 'normal', 'core');
-		add_meta_box('lnk_notas_video_youtube',"Video Youtube", 'lnk_notas_video_youtube_meta_box', null, 'normal', 'core');
+		add_meta_box('lnk_notas_video',"Video Youtube", 'lnk_notas_video_meta_box', null, 'normal', 'core');
 		add_meta_box('lnk_notas_related',"Relacionados", 'lnk_notas_related_meta_box', null, 'normal', 'core');
 	}
 }
@@ -99,13 +99,13 @@ function lnk_notas_audio_meta_box(){
 /**
  * Meta box video youtube
  */
-function lnk_notas_video_youtube_meta_box(){
+function lnk_notas_video_meta_box(){
 	global $post;
 	$id = $post->ID;
-	$url = get_post_meta($id,'lnk_notas_video_youtube',true);
+	$url = get_post_meta($id,'lnk_notas_video',true);
 
-	print "<div id='lnk_notas_video_youtube_container'>";
-	print "<input type='text' name='lnk_notas_video_youtube_input' id='lnk_notas_video_youtube_input' value='".$url."'/>";
+	print "<div id='lnk_notas_video_container'>";
+	print "<input type='text' name='lnk_notas_video_input' id='lnk_notas_video_input' value='".$url."'/>";
 	print "</div>";
 	print "<div style='clear:both;'></div>";
 }
@@ -123,7 +123,7 @@ function lnk_notas_update_post_meta($id) {
   update_post_meta($id,'lnk_notas_sitio_vista_entv',$_POST['lnk_notas_sitio_vista_entv_check']);
   update_post_meta($id,'lnk_notas_sitio_vista_encuentro',$_POST['lnk_notas_sitio_vista_encuentro_check']);
   update_post_meta($id,'lnk_notas_audio',$_POST['lnk_notas_audio_input']);
-  update_post_meta($id,'lnk_notas_video_youtube',$_POST['lnk_notas_video_youtube_input']);
+  update_post_meta($id,'lnk_notas_video',$_POST['lnk_notas_video_input']);
 
   $aPost = get_post($id);
 	$idParent = $aPost->post_parent;
@@ -340,14 +340,14 @@ function lnk_notas_get_audio($post) {
 }
 add_action( 'rest_api_init', 'register_api_lnk_post_audio' );
 
-function register_api_lnk_post_video_youtube() {
-	register_rest_field('post', 'video_youtube', array (
-		'get_callback' => 'lnk_notas_get_video_youtube',
+function register_api_lnk_post_video() {
+	register_rest_field('post', 'video', array (
+		'get_callback' => 'lnk_notas_get_video',
 		'update_callback' => null,
 		'schema' => null,
 	));
 }
-function lnk_notas_get_video_youtube($post) {
-	return get_post_meta($post['id'],'lnk_notas_video_youtube' ,true );
+function lnk_notas_get_video($post) {
+	return get_post_meta($post['id'],'lnk_notas_video' ,true );
 }
-add_action( 'rest_api_init', 'register_api_lnk_post_video_youtube' );
+add_action( 'rest_api_init', 'register_api_lnk_post_video' );
