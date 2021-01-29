@@ -93,12 +93,12 @@ function lnk_notas_audio_meta_box(){
 	$texto2 = get_post_meta($id,'lnk_notas_audio_texto2',true);
 
 	print "<div id='lnk_notas_audio_container'>";
-	print "<label>Audio:</label>";
-	print "<input type='text' name='lnk_notas_audio_input' id='lnk_notas_audio_input' value='".$url."'/>";	
-	print "<label>Texto1:</label>";
-	print "<input type='text' name='lnk_notas_audio_texto1_input' id='lnk_notas_audio_texto1_input' value='".$texto1."'/>";	
-	print "<label>Texto2:</label>";
-	print "<input type='text' name='lnk_notas_audio_texto2_input' id='lnk_notas_audio_texto2_input' value='".$texto2."'/>";	
+	print "<label>Audio:</label>&nbsp;&nbsp;";
+	print "<input type='text' name='lnk_notas_audio_input' id='lnk_notas_audio_input' value='".$url."'/>&nbsp;&nbsp;";	
+	print "<label>Texto1:</label>&nbsp;&nbsp;";
+	print "<input type='text' name='lnk_notas_audio_texto1_input' id='lnk_notas_audio_texto1_input' value='".$texto1."'/>&nbsp;&nbsp;";	
+	print "<label>Texto2:</label>&nbsp;&nbsp;";
+	print "<input type='text' name='lnk_notas_audio_texto2_input' id='lnk_notas_audio_texto2_input' value='".$texto2."'/>&nbsp;&nbsp;";	
 	print "</div>";
 	print "<div style='clear:both;'></div>";
 }
