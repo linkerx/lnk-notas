@@ -351,6 +351,16 @@ function lnk_notas_get_audio($post) {
 }
 add_action( 'rest_api_init', 'register_api_lnk_post_audio' );
 
+function lnk_notas_get_audio_texto1($post) {
+	return get_post_meta($post['id'],'lnk_notas_audio_texto1' ,true );
+}
+add_action( 'rest_api_init', 'register_api_lnk_post_audio_texto1' );
+
+function lnk_notas_get_audio_texto2($post) {
+	return get_post_meta($post['id'],'lnk_notas_audio_texto2' ,true );
+}
+add_action( 'rest_api_init', 'register_api_lnk_post_audio_texto2' );
+
 function register_api_lnk_post_video() {
 	register_rest_field('post', 'video', array (
 		'get_callback' => 'lnk_notas_get_video',
