@@ -89,9 +89,16 @@ function lnk_notas_audio_meta_box(){
 	global $post;
 	$id = $post->ID;
 	$url = get_post_meta($id,'lnk_notas_audio',true);
+	$texto1 = get_post_meta($id,'lnk_notas_audio_texto1',true);
+	$texto2 = get_post_meta($id,'lnk_notas_audio_texto2',true);
 
 	print "<div id='lnk_notas_audio_container'>";
-	print "<input type='text' name='lnk_notas_audio_input' id='lnk_notas_audio_input' value='".$url."'/>";
+	print "<label>Audio:</label>";
+	print "<input type='text' name='lnk_notas_audio_input' id='lnk_notas_audio_input' value='".$url."'/>";	
+	print "<label>Texto1:</label>";
+	print "<input type='text' name='lnk_notas_audio_texto1_input' id='lnk_notas_audio_texto1_input' value='".$texto1."'/>";	
+	print "<label>Texto2:</label>";
+	print "<input type='text' name='lnk_notas_audio_texto2_input' id='lnk_notas_audio_texto2_input' value='".$texto2."'/>";	
 	print "</div>";
 	print "<div style='clear:both;'></div>";
 }
@@ -122,7 +129,11 @@ function lnk_notas_update_post_meta($id) {
   update_post_meta($id,'lnk_notas_volanta',$_POST['lnk_notas_volanta_input']);
   update_post_meta($id,'lnk_notas_sitio_vista_entv',$_POST['lnk_notas_sitio_vista_entv_check']);
   update_post_meta($id,'lnk_notas_sitio_vista_encuentro',$_POST['lnk_notas_sitio_vista_encuentro_check']);
+  
   update_post_meta($id,'lnk_notas_audio',$_POST['lnk_notas_audio_input']);
+  update_post_meta($id,'lnk_notas_audio_texto1',$_POST['lnk_notas_audio_texto1_input']);
+  update_post_meta($id,'lnk_notas_audio_texto2',$_POST['lnk_notas_audio_texto2_input']);
+
   update_post_meta($id,'lnk_notas_video',$_POST['lnk_notas_video_input']);
 
   $aPost = get_post($id);
