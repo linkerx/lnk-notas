@@ -345,6 +345,16 @@ function register_api_lnk_post_audio() {
 		'update_callback' => null,
 		'schema' => null,
 	));
+	register_rest_field('post', 'audio_texto1', array (
+		'get_callback' => 'lnk_notas_get_audio_texto1',
+		'update_callback' => null,
+		'schema' => null,
+	));
+	register_rest_field('post', 'audio_texto2', array (
+		'get_callback' => 'lnk_notas_get_audio_texto2',
+		'update_callback' => null,
+		'schema' => null,
+	));
 }
 function lnk_notas_get_audio($post) {
 	return get_post_meta($post['id'],'lnk_notas_audio' ,true );
